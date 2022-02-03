@@ -6,12 +6,13 @@
   import { select as d3select, selectAll } from 'd3-selection';
   import { transition } from 'd3-transition';
   export let data = [];
-  export let selected = []
+  import { store } from "./stores/game.store";
+
   export let onlySelected = false;
   export let oneCol = false;
   export let table = false;
-  export let step;
 
+  let steps = ["all", "selected", "oneRow", "oneCol", "table"];
   let svg;
   let dots;
   let size = 10;
@@ -24,6 +25,8 @@
   let displayedData = data;
 
 
+  $: step = steps[$store.stepIndex];
+  $: selected = $store.selected
   $: cols = step === "oneCol" || step === "table" ? 1 : Math.ceil(width / (size+padding));
   $: dataRows = Math.ceil(data.length / cols);
   $: selectedRows = Math.ceil(selected.length / cols);
