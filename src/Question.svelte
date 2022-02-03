@@ -2,7 +2,9 @@
   import { createEventDispatcher  } from 'svelte';
   import { checkData, getEntry } from './utils/data.js';
   import Table from './Table.svelte';
-  export let data = [];
+  import { store } from "./stores/game.store";
+
+  // export let data = [];
   export let question;
     export let columns = [
         {key: 'island', name: 'Island'},
@@ -13,6 +15,7 @@
   let { text } = question;
 
   let answer;
+  $:data = $store.selected
 
   function checkAnswer(event) {
       let correct = checkData(data, question, answer)

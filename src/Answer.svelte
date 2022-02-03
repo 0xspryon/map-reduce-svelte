@@ -2,9 +2,9 @@
   import { checkData, getResults } from './utils/data.js';
   import { chunkArray } from './utils'
   import Table from './Table.svelte';
+  import { store } from "./stores/game.store";
 
   export let data = []
-  export let answer = {};
   export let question = {}
     export let columns = [
         {key: 'island', name: 'Island'},
@@ -13,6 +13,8 @@
       ]
   let answers = [];
 
+  //Not used.
+  // $: answer = $store.answer;
   $: if(data) {
     answers = getResults(data, question)
   }
